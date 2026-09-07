@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","title":"Spec Improvement Report","type":"object",
+  "required":["schema_version","before","after","changes","assumptions","questions"],
+  "properties":{
+    "schema_version":{"const":"1.0.0"},
+    "before":{"$ref":"report.schema.json"},"after":{"$ref":"report.schema.json"},
+    "changes":{"type":"array","items":{"type":"object","required":["category","summary","rationale","source"],"properties":{"category":{"type":"string"},"summary":{"type":"string"},"rationale":{"type":"string"},"source":{"enum":["existing-evidence","safe-clarification","proposed-assumption","user-decision-required"]}}}},
+    "assumptions":{"type":"array","items":{"type":"object","required":["text","status"],"properties":{"text":{"type":"string"},"status":{"const":"needs-confirmation"}}}},
+    "questions":{"type":"array","items":{"type":"object","required":["category","question","why_needed"],"properties":{"category":{"type":"string"},"question":{"type":"string"},"why_needed":{"type":"string"}}}}
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "security_relevant":true,
+  "categories":[
+    {"id":"problem_definition","rating":3,"rationale":"User pain and setting are stated, but impact is not measured.","evidence":[{"location":"lines 3-4 / Problem","snippet":"Players lose context while moving between challenge pages and chat."}]},
+    {"id":"goals","rating":3,"rationale":"A goal and one non-goal bound the first release.","evidence":[{"location":"lines 6-7 / Goal","snippet":"Non-goal: team collaboration."}]},
+    {"id":"user_stories","rating":1,"rationale":"A user is implied but end-to-end and alternate flows are absent.","evidence":[{"location":"MISSING","snippet":"Expected explicit user stories and alternate flows are absent."}]},
+    {"id":"functional_requirements","rating":2,"rationale":"Two core endpoints are named, but update, delete, validation, and persistence behavior are unresolved.","evidence":[{"location":"lines 9-11 / Requirements","snippet":"POST /notes accepts challenge_id and body"}]},
+    {"id":"non_functional_requirements","rating":0,"rationale":"No measurable performance, reliability, accessibility, or capacity targets exist.","evidence":[{"location":"MISSING","snippet":"Expected measurable non-functional requirements are absent."}]},
+    {"id":"architecture","rating":1,"rationale":"SQLite is selected, but components and data flow are not designed.","evidence":[{"location":"lines 18-19 / Constraints","snippet":"Use SQLite and run on a single laptop."}]},
+    {"id":"interfaces_contracts","rating":2,"rationale":"Routes and partial payload behavior exist, but schemas and errors are incomplete.","evidence":[{"location":"lines 10-11 / Requirements","snippet":"GET /notes/{challenge_id} returns notes in creation order."}]},
+    {"id":"security_privacy","rating":0,"rationale":"Externally reachable input is described without threat or input-handling requirements.","evidence":[{"location":"MISSING","snippet":"Expected authentication, authorization, sanitization, and data handling rules are absent."}]},
+    {"id":"failure_modes","rating":1,"rationale":"Unknown challenge behavior is covered, but storage and request failures are absent.","evidence":[{"location":"lines 15-16 / Acceptance","snippet":"An unknown challenge returns an empty list with HTTP 200."}]},
+    {"id":"edge_cases","rating":1,"rationale":"Only the unknown-challenge case is covered.","evidence":[{"location":"lines 15-16 / Acceptance","snippet":"An unknown challenge returns an empty list"}]},
+    {"id":"acceptance_criteria","rating":2,"rationale":"Two observable examples exist but do not cover all required behavior.","evidence":[{"location":"lines 13-16 / Acceptance","snippet":"Creating a note and reading the challenge returns the same Markdown body."}]},
+    {"id":"dependencies","rating":2,"rationale":"SQLite and single-laptop constraints are explicit; versions and assumptions are not.","evidence":[{"location":"lines 18-19 / Constraints","snippet":"Use SQLite and run on a single laptop."}]},
+    {"id":"observability","rating":0,"rationale":"No operational signals are specified.","evidence":[{"location":"MISSING","snippet":"Expected logging, metrics, or audit requirements are absent."}]},
+    {"id":"deployment_rollback","rating":0,"rationale":"No rollout, migration, or rollback procedure exists.","evidence":[{"location":"MISSING","snippet":"Expected deployment and rollback strategy is absent."}]},
+    {"id":"implementation_readiness","rating":1,"rationale":"Core behavior is sketched but major design and operational decisions remain.","evidence":[{"location":"lines 9-19","snippet":"Requirements and constraints cover only a minimal happy path."}]},
+    {"id":"ambiguity_testability","rating":2,"rationale":"The examples are testable, but several contract terms and limits are undefined.","evidence":[{"location":"lines 9-16","snippet":"accepts challenge_id and body"}]}
+  ],
+  "issues":[
+    {"id":"I-001","category":"security_privacy","severity":"critical","title":"Untrusted Markdown has no safety policy","evidence":{"location":"lines 10 and 15","snippet":"body ... same Markdown body"},"remediation":"Define authentication, authorization, input-size limits, rendering sanitization, and storage/retention rules."},
+    {"id":"I-002","category":"non_functional_requirements","severity":"high","title":"No measurable operational targets","evidence":{"location":"MISSING","snippet":"Expected latency, capacity, reliability, and resource limits are absent."},"remediation":"Add testable p95 latency, note-size, note-count, startup, durability, and supported-platform targets."},
+    {"id":"I-003","category":"failure_modes","severity":"high","title":"Write and database failures are undefined","evidence":{"location":"MISSING","snippet":"Expected error responses and recovery behavior are absent."},"remediation":"Specify validation errors, SQLite lock/full/corruption handling, timeouts, atomicity, and retry/idempotency behavior."}
+  ]
+}

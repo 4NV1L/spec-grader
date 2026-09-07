@@ -1,0 +1,31 @@
+{
+  "version":"1.0.0",
+  "scale":{"0":"Absent or unusable","1":"Mentioned but materially incomplete, vague, or contradictory","2":"Partially specified; major implementation questions remain","3":"Clear and substantially complete; minor gaps remain","4":"Explicit, measurable, internally consistent, and implementation-ready"},
+  "categories":[
+    {"id":"problem_definition","label":"Problem definition","weight":7,"guidance":"Problem, affected users, present pain, and relevant context are explicit."},
+    {"id":"goals","label":"Goals and non-goals","weight":5,"guidance":"Outcomes, success measures, scope, and non-goals are bounded."},
+    {"id":"user_stories","label":"User stories and flows","weight":5,"guidance":"Actors, primary journeys, permissions, and alternate flows are covered."},
+    {"id":"functional_requirements","label":"Functional requirements","weight":10,"guidance":"Behavior is complete, uniquely identifiable, prioritized, and testable."},
+    {"id":"non_functional_requirements","label":"Non-functional requirements","weight":7,"guidance":"Performance, reliability, accessibility, compatibility, and scale have measurable targets."},
+    {"id":"architecture","label":"Architecture","weight":6,"guidance":"Components, responsibilities, data flow, state, and important tradeoffs are defined."},
+    {"id":"interfaces_contracts","label":"Interfaces and contracts","weight":7,"guidance":"APIs, schemas, events, errors, versioning, and compatibility rules are explicit."},
+    {"id":"security_privacy","label":"Security and privacy","weight":7,"guidance":"Threats, authn/authz, secrets, sensitive data, retention, and abuse cases are addressed."},
+    {"id":"failure_modes","label":"Failure modes","weight":5,"guidance":"Expected failures, recovery, retries, timeouts, idempotency, and degraded behavior are specified."},
+    {"id":"edge_cases","label":"Edge cases","weight":5,"guidance":"Boundary, empty, duplicate, concurrency, invalid-input, and lifecycle cases are considered."},
+    {"id":"acceptance_criteria","label":"Acceptance criteria","weight":9,"guidance":"Requirements map to observable pass/fail criteria, including negative scenarios."},
+    {"id":"dependencies","label":"Dependencies and constraints","weight":4,"guidance":"External systems, owners, assumptions, constraints, and unresolved decisions are named."},
+    {"id":"observability","label":"Observability","weight":4,"guidance":"Logs, metrics, traces, audit signals, dashboards, and alerts support operation."},
+    {"id":"deployment_rollback","label":"Deployment and rollback","weight":4,"guidance":"Migration, rollout, feature flags, rollback, and compatibility strategy are safe and explicit."},
+    {"id":"implementation_readiness","label":"Implementation readiness","weight":8,"guidance":"Sequencing, ownership, decisions, artifacts, and definition of done permit autonomous execution."},
+    {"id":"ambiguity_testability","label":"Ambiguity and testability","weight":7,"guidance":"Normative language is precise; terms, thresholds, and verification methods are defined."}
+  ],
+  "gates":[
+    {"id":"core_behavior_missing","description":"Core behavior or functional requirements are absent","category":"functional_requirements","trigger_max_rating":1,"score_cap":54,"verdict_cap":"NOT-READY"},
+    {"id":"acceptance_unverifiable","description":"Acceptance criteria are absent or not objectively verifiable","category":"acceptance_criteria","trigger_max_rating":1,"score_cap":59,"verdict_cap":"NOT-READY"},
+    {"id":"security_unaddressed","description":"Security/privacy is absent for a security-relevant spec","category":"security_privacy","trigger_max_rating":1,"conditional_flag":"security_relevant","score_cap":64,"verdict_cap":"READY-WITH-CHANGES"},
+    {"id":"blocking_ambiguity","description":"Ambiguity prevents deterministic implementation or testing","category":"ambiguity_testability","trigger_max_rating":1,"score_cap":59,"verdict_cap":"NOT-READY"}
+  ],
+  "verdicts":{"READY":{"min_score":85,"min_confidence":80},"READY-WITH-CHANGES":{"min_score":65,"min_confidence":55},"NOT-READY":{"min_score":0,"min_confidence":0}},
+  "grades":[{"min":93,"grade":"A"},{"min":90,"grade":"A-"},{"min":87,"grade":"B+"},{"min":83,"grade":"B"},{"min":80,"grade":"B-"},{"min":77,"grade":"C+"},{"min":73,"grade":"C"},{"min":70,"grade":"C-"},{"min":60,"grade":"D"},{"min":0,"grade":"F"}],
+  "severity":{"critical":"Blocks safe or correct implementation","high":"Likely causes rework, defects, or operational risk","medium":"Meaningful incompleteness with a practical workaround","low":"Localized clarity or polish improvement"}
+}

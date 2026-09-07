@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec Grader"
+  short_description: "Score implementation specs with deterministic gates"
+  default_prompt: "Use $spec-grader to grade this Markdown specification and produce Markdown and JSON reports."

@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","title":"Spec Grade Report","type":"object",
+  "required":["schema_version","source","rubric_version","generated_at","score","raw_score","grade","verdict","autonomous_implementation_confidence","gate_failures","categories","issues","score_improvement_plan"],
+  "properties":{
+    "schema_version":{"const":"1.0.0"},"source":{"type":"string"},"rubric_version":{"type":"string"},"generated_at":{"type":"string","format":"date-time"},
+    "score":{"type":"integer","minimum":0,"maximum":100},"raw_score":{"type":"number","minimum":0,"maximum":100},"grade":{"type":"string"},"verdict":{"enum":["READY","READY-WITH-CHANGES","NOT-READY"]},"autonomous_implementation_confidence":{"type":"integer","minimum":0,"maximum":100},
+    "gate_failures":{"type":"array","items":{"type":"object","required":["id","reason","score_cap","verdict_cap"],"properties":{"id":{"type":"string"},"reason":{"type":"string"},"score_cap":{"type":"integer"},"verdict_cap":{"type":"string"}}}},
+    "categories":{"type":"array","items":{"type":"object","required":["id","label","weight","rating","score","rationale","evidence"],"properties":{"id":{"type":"string"},"label":{"type":"string"},"weight":{"type":"number"},"rating":{"type":"integer","minimum":0,"maximum":4},"score":{"type":"number"},"rationale":{"type":"string"},"evidence":{"type":"array","items":{"$ref":"#/$defs/evidence"}}}}},
+    "issues":{"type":"array","items":{"type":"object","required":["id","category","severity","title","evidence","remediation"],"properties":{"id":{"type":"string"},"category":{"type":"string"},"severity":{"enum":["critical","high","medium","low"]},"title":{"type":"string"},"evidence":{"$ref":"#/$defs/evidence"},"remediation":{"type":"string"}}}},
+    "score_improvement_plan":{"type":"array","items":{"type":"object","required":["category","label","current_rating","target_rating","potential_point_gain","clears_gate","rubric_target","actions"],"properties":{"category":{"type":"string"},"label":{"type":"string"},"current_rating":{"type":"integer","minimum":0,"maximum":3},"target_rating":{"type":"integer","minimum":1,"maximum":4},"potential_point_gain":{"type":"number","minimum":0},"clears_gate":{"type":"boolean"},"rubric_target":{"type":"string"},"actions":{"type":"array","minItems":1,"items":{"type":"string"}}}}}
+  },"$defs":{"evidence":{"type":"object","required":["location","snippet"],"properties":{"location":{"type":"string"},"snippet":{"type":"string","maxLength":500}}}}
+}

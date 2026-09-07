@@ -1,0 +1,25 @@
+{
+  "security_relevant":true,
+  "categories":[
+    {"id":"problem_definition","rating":3,"rationale":"User, workflow, harm, and evidence gap are explicit.","evidence":[{"location":"Problem","snippet":"causing duplicated investigation and notes attached to the wrong challenge"}]},
+    {"id":"goals","rating":3,"rationale":"Goals and non-goals are bounded; success thresholds remain open.","evidence":[{"location":"Goals and non-goals","snippet":"team collaboration, remote synchronization, and multi-user accounts"}]},
+    {"id":"user_stories","rating":1,"rationale":"The user is named but full journeys remain absent.","evidence":[{"location":"MISSING","snippet":"Expected end-to-end user stories are absent."}]},
+    {"id":"functional_requirements","rating":3,"rationale":"Core behaviors are identified and traceable; scope questions remain.","evidence":[{"location":"Functional requirements","snippet":"FR-1: POST /notes"}]},
+    {"id":"non_functional_requirements","rating":1,"rationale":"Targets are explicitly requested but not decided.","evidence":[{"location":"Open questions","snippet":"What latency, capacity, durability"}]},
+    {"id":"architecture","rating":1,"rationale":"SQLite is selected without component or data-flow design.","evidence":[{"location":"Constraints","snippet":"Use SQLite"}]},
+    {"id":"interfaces_contracts","rating":2,"rationale":"Endpoints and selected responses exist; schemas and errors remain open.","evidence":[{"location":"Data and interfaces","snippet":"request/response schemas ... require owner decisions"}]},
+    {"id":"security_privacy","rating":1,"rationale":"Untrusted input is recognized but controls remain undecided.","evidence":[{"location":"Data and interfaces","snippet":"Markdown must be treated as untrusted input"}]},
+    {"id":"failure_modes","rating":1,"rationale":"Failures are enumerated but behavior is unresolved.","evidence":[{"location":"Open questions","snippet":"SQLite lock, full-disk, and corruption failures"}]},
+    {"id":"edge_cases","rating":2,"rationale":"Unknown IDs and several failure boundaries are visible.","evidence":[{"location":"Functional requirements","snippet":"unknown challenge ID returns an empty JSON list"}]},
+    {"id":"acceptance_criteria","rating":3,"rationale":"Criteria map to requirements and are observable; negative cases remain blocked.","evidence":[{"location":"Acceptance criteria","snippet":"AC-1 / FR-1, FR-2"}]},
+    {"id":"dependencies","rating":2,"rationale":"SQLite and local deployment are explicit.","evidence":[{"location":"Constraints","snippet":"SQLite and run on a single laptop"}]},
+    {"id":"observability","rating":0,"rationale":"No signals are defined.","evidence":[{"location":"MISSING","snippet":"Expected observability requirements are absent."}]},
+    {"id":"deployment_rollback","rating":1,"rationale":"Deployment concerns are listed but undecided.","evidence":[{"location":"Open questions","snippet":"rollout, migration, backup, and rollback"}]},
+    {"id":"implementation_readiness","rating":2,"rationale":"Traceability improved, but owner decisions still block autonomous implementation.","evidence":[{"location":"Open questions","snippet":"multiple unresolved implementation decisions"}]},
+    {"id":"ambiguity_testability","rating":3,"rationale":"Known behaviors are precise and unknowns are explicitly separated.","evidence":[{"location":"Acceptance criteria","snippet":"Given a valid challenge ID"}]}
+  ],
+  "issues":[
+    {"id":"I-101","category":"security_privacy","severity":"critical","title":"Security controls remain owner decisions","evidence":{"location":"Open questions","snippet":"What authentication or local-access boundary is required?"},"remediation":"Choose the access boundary, input limits, sanitization behavior, and retention policy."},
+    {"id":"I-102","category":"non_functional_requirements","severity":"high","title":"Quality targets remain undefined","evidence":{"location":"Open questions","snippet":"What latency, capacity, durability"},"remediation":"Supply measurable targets and verification conditions."}
+  ]
+}
